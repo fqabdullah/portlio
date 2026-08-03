@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/about", label: "About" },
@@ -17,10 +18,17 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const { scrollHeight, clientHeight } = document.documentElement;
+      const max = scrollHeight - clientHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -32,8 +40,15 @@ export default function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-display text-lg font-medium tracking-tight">
-          abdullah<span className="text-signal">.</span>farooq
+        <Link
+          href="/"
+          className="group font-display text-lg font-medium tracking-tight transition-transform duration-300 hover:-translate-y-px active:scale-95"
+        >
+          abdullah
+          <span className="inline-block text-signal transition-transform duration-300 group-hover:scale-150">
+            .
+          </span>
+          farooq
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -58,24 +73,30 @@ export default function Header() {
           })}
         </nav>
 
-        <Link
-          href="/contact"
-          className="hidden md:inline-flex items-center rounded-md border border-signal/40 px-4 py-2 font-mono text-xs text-signal transition-all duration-300 hover:bg-signal/10 hover:-translate-y-0.5"
-        >
-          Let&apos;s talk
-        </Link>
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+          <Link
+            href="/contact"
+            className="inline-flex items-center rounded-md border border-signal/40 px-4 py-2 font-mono text-xs text-signal transition-all duration-300 hover:bg-signal/10 hover:-translate-y-0.5 active:scale-95"
+          >
+            Let&apos;s talk
+          </Link>
+        </div>
 
-        <button
-          className="md:hidden text-text"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            className="text-text transition-transform duration-200 active:scale-90"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <nav className="md:hidden border-t border-border bg-bg px-6 py-4 flex flex-col gap-4">
+        <nav className="md:hidden border-t border-border bg-bg px-6 py-4 flex flex-col gap-4 animate-fade-up">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -90,6 +111,12 @@ export default function Header() {
           ))}
         </nav>
       )}
+
+      <div
+        className="h-px bg-signal transition-[width] duration-150 ease-out"
+        style={{ width: `${progress * 100}%` }}
+        aria-hidden="true"
+      />
     </header>
   );
 }

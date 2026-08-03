@@ -9,24 +9,26 @@ const experience = [
     company: "Logic Silicon",
     role: "DevOps Engineer",
     location: "Islamabad, Pakistan",
-    period: "April 2026 – Present",
+    period: "June 2026 – Present",
     current: true,
     highlights: [
-      "Led zero-downtime lift-and-shift migration of 3+ enterprise workloads to AWS using MGN and DMS.",
-      "Cut infra provisioning time 40% with Terraform (IaC), tfsec policy-as-code, and Ansible drift automation.",
-      "Delivered 99.9% availability via Dockerized microservices/ML workloads on self-healing, autoscaling K8s.",
-      "Cut compute costs 20% using Fargate/EC2, ALB traffic distribution, and CloudFront edge caching.",
-      "Enabled zero-touch continuous deployment with GitOps and Helm-based declarative K8s delivery.",
-      "Shrunk release cycles 30% with Jenkins CI/CD, SonarQube SAST, and Trivy image vulnerability scanning.",
-      "Cut MTTD/MTTR 35% with full-stack observability: Prometheus, Grafana, and CloudWatch log aggregation.",
-      "Boosted ML inference speed 25% via Redis caching and Pinecone vector search for RAG pipelines.",
+      "Improved production workload reliability by 90% across 4+ enterprise applications by managing Linux-based environments and containerized deployments using Docker and Kubernetes (Amazon EKS and on-prem RKE2).",
+      "Reduced deployment cycle time by 96% by architecting and automating CI/CD pipelines using Jenkins, CloudBees Jenkins, and GitHub Actions.",
+      "Cut manual cluster management effort by 75% by implementing GitOps-based deployments with ArgoCD and administering multi-cluster Kubernetes environments via Rancher.",
+      "Reduced monitoring data loss incidents by 99% by configuring Amazon EBS CSI Driver to enable persistent storage for Prometheus and Grafana across pod restarts.",
+      "Decreased critical security findings by 99% by integrating Checkov and SonarQube into Infrastructure-as-Code and application pipelines for automated vulnerability scanning.",
+      "Achieved 70% faster disaster recovery with zero data loss across 4+ workloads by designing and implementing a Kubernetes backup and DR strategy using Velero.",
+      "Strengthened cloud security posture across 4+ enterprise migration projects by managing AWS services including VPC, EC2, EKS, AWS CLI, AWS MGN, KMS, DMS, Lambda, S3, FSx, RDS, DynamoDB, SSM, and GuardDuty.",
+      "Reduced enterprise migration time by 90% by automating deployment workflows using Ansible across HPC, Engineering Tools, Web Applications, and CaaS environments.",
+      "Reduced system downtime by 90% by managing container image lifecycle through Harbor and configuring F5 hardware load balancers for high availability.",
+      "Delivered secure, scalable, cloud-native solutions supporting 4+ production applications by collaborating cross-functionally with engineering, security, and infrastructure teams.",
     ],
   },
   {
     company: "Rapids AI",
     role: "Jr. DevOps",
     location: "Islamabad, Pakistan",
-    period: "June 2025 – June 2026",
+    period: "May 2025 – June 2026",
     current: false,
     highlights: [
       "Deployed Hyperledger Fabric (Go chaincode, CouchDB, NestJS gateway) on K8s for permissioned prod transactions.",
@@ -68,7 +70,7 @@ function ExperienceCard({ job }: { job: (typeof experience)[number] }) {
         }`}
       />
 
-      <div className="rounded-lg border border-border bg-surface p-6 sm:p-7 transition-all duration-300 hover:border-signal/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
+      <div className="rounded-lg border border-border bg-surface p-6 sm:p-7 transition-all duration-300 hover:border-signal/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 active:scale-[0.995]">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
           <h3 className="font-display text-xl font-medium">
             {job.role} <span className="text-muted">· {job.company}</span>

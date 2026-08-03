@@ -51,7 +51,7 @@ export default function Certifications() {
                 href={cert.verifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between rounded-lg border border-border bg-surface px-6 py-5 transition-all duration-300 hover:border-signal/40 hover:-translate-y-0.5"
+                className="flex items-center justify-between rounded-lg border border-border bg-surface px-6 py-5 transition-all duration-300 hover:border-signal/40 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0"
               >
                 <div>
                   <h3 className="text-sm font-medium">{cert.name}</h3>

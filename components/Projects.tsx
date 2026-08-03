@@ -1,5 +1,8 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "./Reveal";
+import { useTilt } from "./useTilt";
 
 const projects = [
   {
@@ -36,6 +39,50 @@ const projects = [
   },
 ];
 
+function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+  const { ref, onMouseMove, onMouseEnter, onMouseLeave } = useTilt<HTMLAnchorElement>();
+
+  return (
+    <a
+      ref={ref}
+      href={project.link}
+      onMouseMove={onMouseMove}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="group relative overflow-hidden rounded-lg border border-border bg-surface p-7 flex flex-col h-full [transform-style:preserve-3d] [transform:perspective(1000px)_translateY(var(--tilt-lift,0px))_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))] transition-[transform,border-color,box-shadow] duration-500 ease-out hover:border-signal/40 hover:shadow-xl hover:shadow-black/25 active:scale-[0.98]"
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[var(--glare-opacity,0)] transition-opacity duration-300"
+        style={{
+          background:
+            "radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgb(var(--color-signal) / 0.15), transparent 60%)",
+        }}
+      />
+
+      <div className="flex items-start justify-between mb-4">
+        <h3 className="font-display text-xl font-medium">{project.title}</h3>
+        <ArrowUpRight
+          size={20}
+          className="text-muted transition-all duration-300 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flex-shrink-0"
+        />
+      </div>
+      <p className="text-muted text-sm leading-relaxed mb-5">{project.description}</p>
+      <div className="flex flex-wrap gap-2 mb-5">
+        {project.stack.map((tech) => (
+          <span
+            key={tech}
+            className="font-mono text-[11px] rounded border border-border px-2 py-1 text-muted transition-colors duration-300 group-hover:border-signal/30"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+      <p className="mt-auto font-mono text-xs text-online">→ {project.metric}</p>
+    </a>
+  );
+}
+
 export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6 border-t border-border">
@@ -50,36 +97,7 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={i * 100}>
-              <a
-                href={project.link}
-                className="group rounded-lg border border-border bg-surface p-7 flex flex-col h-full transition-all duration-300 hover:border-signal/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/25"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="font-display text-xl font-medium">
-                    {project.title}
-                  </h3>
-                  <ArrowUpRight
-                    size={20}
-                    className="text-muted transition-all duration-300 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flex-shrink-0"
-                  />
-                </div>
-                <p className="text-muted text-sm leading-relaxed mb-5">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="font-mono text-[11px] rounded border border-border px-2 py-1 text-muted transition-colors duration-300 group-hover:border-signal/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-auto font-mono text-xs text-online">
-                  → {project.metric}
-                </p>
-              </a>
+              <ProjectCard project={project} />
             </Reveal>
           ))}
         </div>

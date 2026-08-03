@@ -2,13 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------
+   Theme tokens — RGB triplets so Tailwind's <alpha-value> opacity
+   modifiers (e.g. bg-signal/10, border-signal/30) keep working.
+   Light is the default (:root); .dark overrides via next-themes.
+   --------------------------------------------------------------- */
+:root {
+  --color-bg: 245 246 248;
+  --color-surface: 255 255 255;
+  --color-surface2: 241 245 249;
+  --color-border: 226 232 240;
+  --color-signal: 181 84 14;
+  --color-online: 15 118 110;
+  --color-text: 15 23 42;
+  --color-muted: 100 116 139;
+}
+
+.dark {
+  --color-bg: 11 14 20;
+  --color-surface: 18 22 31;
+  --color-surface2: 26 31 43;
+  --color-border: 35 41 54;
+  --color-signal: 255 138 61;
+  --color-online: 94 234 212;
+  --color-text: 230 232 235;
+  --color-muted: 139 147 161;
+}
+
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
-  background-color: #0B0E14;
-  color: #E6E8EB;
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
+}
+
+/* Smooth, subtle cross-fade whenever the theme is toggled */
+body,
+header,
+footer,
+section,
+a,
+button {
+  transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
 }
 
 /* Respect reduced-motion preference */
@@ -24,20 +66,27 @@ body {
 /* Visible keyboard focus for accessibility */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #FF8A3D;
+  outline: 2px solid rgb(var(--color-signal));
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 ::selection {
-  background-color: #FF8A3D;
-  color: #0B0E14;
+  background-color: rgb(var(--color-signal));
+  color: rgb(var(--color-bg));
 }
 
 .section-label {
-  font-family: var(--font-jetbrains-mono), monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #FF8A3D;
+  color: rgb(var(--color-signal));
+}
+
+/* Light mode only: a white card on a near-white page has almost no natural
+   contrast, so surfaces get a faint resting elevation shadow for definition.
+   Dark mode skips this — cards already read clearly against the near-black bg. */
+:root:not(.dark) .bg-surface {
+  box-shadow: 0 1px 2px -1px rgb(15 23 42 / 0.05), 0 2px 4px -2px rgb(15 23 42 / 0.06);
 }

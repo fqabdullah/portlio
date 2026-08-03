@@ -27,7 +27,7 @@ export default function QuickNav() {
             <Reveal key={item.href} delay={i * 70}>
               <Link
                 href={item.href}
-                className="group flex items-center gap-4 rounded-lg border border-border bg-surface p-5 transition-all duration-300 hover:border-signal/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
+                className="group flex items-center gap-4 rounded-lg border border-border bg-surface p-5 transition-all duration-300 hover:border-signal/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] active:translate-y-0"
               >
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-surface2 text-signal">
                   <item.icon size={18} />

@@ -28,7 +28,7 @@ export default function Contact() {
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 font-mono text-sm transition-all duration-300 hover:border-signal/40 hover:text-signal hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 font-mono text-sm transition-all duration-300 hover:border-signal/40 hover:text-signal hover:-translate-y-0.5 active:scale-95 active:translate-y-0"
               >
                 <link.icon size={16} />
                 {link.label}
