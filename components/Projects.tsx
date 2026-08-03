@@ -2,9 +2,30 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "./Reveal";
+import ProjectGallery from "./ProjectGallery";
 import { useTilt } from "./useTilt";
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  stack: string[];
+  metric: string;
+  link: string;
+  images?: string[];
+  featured?: boolean;
+};
+
+const projects: Project[] = [
+  {
+    title: "Kabayani.ph — Philippine Crowdfunding Platform",
+    description:
+      "Production AWS infrastructure for a crowdfunding platform, built entirely with Terraform and deployed via a fully automated CI/CD pipeline.",
+    stack: ["Terraform", "AWS ECS", "CloudFront", "GitHub Actions", "Trivy", "Checkov"],
+    metric: "Push → build → scan → deploy, zero downtime",
+    link: "https://kabayani.ph",
+    images: ["/projects/kabayani-home.png", "/projects/kabayani-ecs.png"],
+    featured: true,
+  },
   {
     title: "Zero-Downtime CI/CD Pipeline",
     description:
@@ -39,17 +60,22 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+function ProjectCard({ project }: { project: Project }) {
   const { ref, onMouseMove, onMouseEnter, onMouseLeave } = useTilt<HTMLAnchorElement>();
+  const isExternal = project.link.startsWith("http");
 
   return (
     <a
       ref={ref}
       href={project.link}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="group relative overflow-hidden rounded-lg border border-border bg-surface p-7 flex flex-col h-full [transform-style:preserve-3d] [transform:perspective(1000px)_translateY(var(--tilt-lift,0px))_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))] transition-[transform,border-color,box-shadow] duration-500 ease-out hover:border-signal/40 hover:shadow-xl hover:shadow-black/25 active:scale-[0.98]"
+      className={`group relative overflow-hidden rounded-lg border bg-surface p-7 flex flex-col h-full [transform-style:preserve-3d] [transform:perspective(1000px)_translateY(var(--tilt-lift,0px))_rotateX(var(--tilt-x,0deg))_rotateY(var(--tilt-y,0deg))] transition-[transform,border-color,box-shadow] duration-500 ease-out hover:border-signal/40 hover:shadow-xl hover:shadow-black/25 active:scale-[0.98] ${
+        project.featured ? "border-signal/25" : "border-border"
+      }`}
     >
       <span
         aria-hidden="true"
@@ -59,6 +85,12 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
             "radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgb(var(--color-signal) / 0.15), transparent 60%)",
         }}
       />
+
+      {project.images && <ProjectGallery images={project.images} alt={project.title} />}
+
+      {project.featured && (
+        <p className="section-label mb-2 !text-[10px]">★ featured project</p>
+      )}
 
       <div className="flex items-start justify-between mb-4">
         <h3 className="font-display text-xl font-medium">{project.title}</h3>
