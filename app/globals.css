@@ -8,13 +8,13 @@
    Light is the default (:root); .dark overrides via next-themes.
    --------------------------------------------------------------- */
 :root {
-  --color-bg: 245 246 248;
-  --color-surface: 255 255 255;
-  --color-surface2: 241 245 249;
-  --color-border: 226 232 240;
+  --color-bg: 237 238 241;
+  --color-surface: 248 248 250;
+  --color-surface2: 234 236 240;
+  --color-border: 215 219 226;
   --color-signal: 181 84 14;
   --color-online: 15 118 110;
-  --color-text: 15 23 42;
+  --color-text: 33 39 55;
   --color-muted: 100 116 139;
 }
 

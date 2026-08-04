@@ -27,35 +27,34 @@ const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Wanderlust — CI/CD on AWS EKS",
+    description:
+      "End-to-end CI/CD automation on AWS EKS — Jenkins for CI, ArgoCD for GitOps-driven deployment, SonarQube and Trivy for security scanning, and Prometheus/Grafana for real-time observability.",
+    stack: ["AWS EKS", "Jenkins", "ArgoCD", "SonarQube", "Trivy", "Prometheus", "Helm"],
+    metric: "Zero-downtime releases, real-time observability",
+    link: "#",
+    images: [
+      "/projects/wanderlust-pipeline.jpg",
+      "/projects/wanderlust-argocd.jpg",
+      "/projects/wanderlust-grafana.jpg",
+      "/projects/wanderlust-jenkins.jpg",
+    ],
+    featured: true,
+  },
+  {
+    title: "Scalable E-Commerce DevOps Pipeline",
+    description:
+      "Full CI/CD pipeline for a React/Node/MongoDB e-commerce app — Jenkins automation, multi-stage Docker builds, Kubernetes deployment with HPA autoscaling, and real-time Slack build notifications.",
+    stack: ["Jenkins", "Docker", "Kubernetes", "React", "Node.js", "Slack"],
+    metric: "Automated build → scan → deploy → notify",
+    link: "https://github.com/RayanNadeem/devops_project",
+  },
+  {
     title: "Zero-Downtime CI/CD Pipeline",
     description:
       "GitHub Actions pipeline that builds, tests, containerizes, and deploys a microservice to Kubernetes with automatic rollback on failed health checks.",
     stack: ["GitHub Actions", "Docker", "Kubernetes", "Helm"],
     metric: "Deploy time cut from 25 min to 4 min",
-    link: "#",
-  },
-  {
-    title: "Multi-Environment AWS Infrastructure",
-    description:
-      "Terraform modules provisioning VPC, EKS cluster, and RDS across dev, staging, and production with remote state and environment isolation.",
-    stack: ["Terraform", "AWS", "EKS", "RDS"],
-    metric: "3 environments, 1 codebase",
-    link: "#",
-  },
-  {
-    title: "GitOps Deployment with ArgoCD",
-    description:
-      "Kubernetes cluster syncing deployments automatically from Git using ArgoCD, with Flux as a fallback comparison for sync strategies.",
-    stack: ["ArgoCD", "Kubernetes", "GitOps"],
-    metric: "Fully auditable deploy history",
-    link: "#",
-  },
-  {
-    title: "Observability Stack",
-    description:
-      "Prometheus and Grafana stack monitoring cluster health and application metrics, with custom alerting rules routed to Slack.",
-    stack: ["Prometheus", "Grafana", "Alertmanager"],
-    metric: "99.9% uptime visibility",
     link: "#",
   },
 ];
